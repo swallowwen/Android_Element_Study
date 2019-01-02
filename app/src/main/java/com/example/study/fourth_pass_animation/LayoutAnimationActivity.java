@@ -11,6 +11,7 @@ import android.view.animation.LayoutAnimationController;
 import com.example.study.R;
 
 /**
+ * 使用LayoutAnimation为ViewGroup的子View添加入场动画
  * Created by swallow on 2018/12/18.
  */
 

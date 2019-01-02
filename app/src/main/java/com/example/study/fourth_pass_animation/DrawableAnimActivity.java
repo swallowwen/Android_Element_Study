@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.example.study.R;
 
 /**
+ * 帧动画
  * Created by swallow on 2018/12/20.
  */
 

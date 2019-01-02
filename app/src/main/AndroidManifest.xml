@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".fourth_pass_animation.DrawableAnimActivity">
+        <activity android:name=".fourth_pass_animation.PropertySpecialUseActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,9 +17,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".fourth_pass_animation.LayoutAnimationActivity"/>
-        <activity android:name=".fourth_pass_animation.AnimateActivity"/>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".fourth_pass_animation.LayoutAnimationActivity" />
+        <activity android:name=".fourth_pass_animation.AnimateActivity" />
+        <activity android:name=".fourth_pass_animation.DrawableAnimActivity" />
+        <activity android:name=".fourth_pass_animation.ValueAnimActivity" />
     </application>
 
 </manifest>

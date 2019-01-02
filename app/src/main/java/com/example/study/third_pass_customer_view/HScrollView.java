@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
 
+/**
+ * 继承ViewGroup自定义View
+ */
 public class HScrollView extends ViewGroup {
     //分别记录上一次滑动的坐标
     private int mLastX = 0;

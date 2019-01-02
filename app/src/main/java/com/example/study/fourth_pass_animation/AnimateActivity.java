@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.example.study.R;
 
 /**
+ * View动画
  * Created by swallow on 2018/12/17.
  */
 

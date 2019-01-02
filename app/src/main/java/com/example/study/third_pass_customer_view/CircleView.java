@@ -10,6 +10,9 @@ import android.view.View;
 
 import com.example.study.R;
 
+/**
+ *继承View自定义View
+ */
 public class CircleView extends View {
     private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private int color = Color.RED;
