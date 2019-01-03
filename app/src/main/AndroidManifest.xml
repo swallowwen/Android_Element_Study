@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".fourth_pass_animation.PropertySpecialUseActivity">
+        <activity android:name=".fourth_pass_gesturedetector.ScaleGestureDetectorActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,6 +22,8 @@
         <activity android:name=".fourth_pass_animation.AnimateActivity" />
         <activity android:name=".fourth_pass_animation.DrawableAnimActivity" />
         <activity android:name=".fourth_pass_animation.ValueAnimActivity" />
+        <activity android:name=".fourth_pass_animation.PropertySpecialUseActivity" />
+        <activity android:name=".fourth_pass_gesturedetector.GestureDetectorActivity" />
     </application>
 
 </manifest>
