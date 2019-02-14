@@ -95,7 +95,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 //        }
         String url = urls[i];
         holder.ivImage.setTag(url);
-        loadBitmap(holder.ivImage, url);
+        loadBitmap(url);
     }
 
     @Override
@@ -160,9 +160,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
      * 加载Bitmap对象。此方法会在LruCache中检查所有屏幕中可见的ImageView的Bitmap对象，
      * 如果发现任何一个ImageView的Bitmap对象不在缓存中，就会开启异步线程去下载图片。
      */
-    public void loadBitmap(ImageView target, String url) {
-        Bitmap bitmapFromMemCache = getBitmapFromMemCache(url);
-        if (bitmapFromMemCache == null) {
+    public void loadBitmap(String url) {
+        Bitmap bitmap = getBitmapFromMemCache(url);
+        if (bitmap == null) {
             BitmapWorkerTask task = new BitmapWorkerTask();
             taskCollection.add(task);
             task.execute(url);
@@ -238,9 +238,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
                 if (fd != null) {
                     bitmap = BitmapFactory.decodeFileDescriptor(fd);
                 }
-                if (bitmap != null) {
-                    addBitmapToMemoryCache(strings[0], bitmap);
-                }
                 return bitmap;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -262,7 +259,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
             // 根据Tag找到相应的ImageView控件，将下载好的图片显示出来。
             ImageView imageView = mPhotoWall.findViewWithTag(imgUrl);
             if (imageView != null && bitmap != null) {
-                imageView.setImageBitmap(bitmap);
+                imageView.setImageBitmap(loadBitmapFromDiskCache(imgUrl,imageView.getWidth(),imageView.getHeight()));
             }
             taskCollection.remove(this);
         }
@@ -277,6 +274,34 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
                 task.cancel(false);
             }
         }
+    }
+
+    public Bitmap loadBitmapFromDiskCache(String key, int reqWidth, int reqHeight) {
+        Bitmap bitmap = null;
+        String s = hashKeyForDisk(key);
+        try {
+            DiskLruCache.Snapshot snapshot = diskLruCache.get(s);
+            if (snapshot != null) {
+                FileInputStream fis = (FileInputStream) snapshot.getInputStream(0);
+                FileDescriptor fd = fis.getFD();
+                bitmap = decodeBitmapFromFd(fd, reqWidth, reqHeight);
+                if (bitmap != null) {
+                    addBitmapToMemoryCache(key, bitmap);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
+    public Bitmap decodeBitmapFromFd(FileDescriptor fd, int reqWidth, int reqHeight) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFileDescriptor(fd, null, options);
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFileDescriptor(fd, null, options);
     }
 
     /**
@@ -297,6 +322,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         Bitmap bitmap = BitmapFactory.decodeResource(res, resId, options);
         return bitmap;
     }
+
 
     /**
      * 计算图片的缩放因子

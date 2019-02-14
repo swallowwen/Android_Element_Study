@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -27,6 +28,7 @@
         <activity android:name=".fourth_pass_animation.ValueAnimActivity" />
         <activity android:name=".fourth_pass_animation.PropertySpecialUseActivity" />
         <activity android:name=".fourth_pass_gesturedetector.GestureDetectorActivity" />
+        <activity android:name=".seven_pass_sqlite.SQLiteActivity" />
     </application>
 
 </manifest>
