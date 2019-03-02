@@ -8,11 +8,17 @@ public class SynchronizedTest {
 //            TestThread thread = new TestThread();
 //            thread.start();
 //        }
-        Producer producer=new Producer();
-        producer.start();
-        new Consumer("c1",producer).start();
-        new Consumer("c2",producer).start();
-        new Consumer("c3",producer).start();
+//        Producer producer=new Producer();
+//        producer.start();
+//        new Consumer("c1",producer).start();
+//        new Consumer("c2",producer).start();
+//        new Consumer("c3",producer).start();
+        VideoConference conference = new VideoConference(10);
+        new Thread(conference).start();
+        for (int i = 0; i < 10; i++) {
+            Thread thread = new Thread(new Partcipant("Partcipant" + i, conference));
+            thread.start();
+        }
     }
 
     static class TestThread extends Thread {
