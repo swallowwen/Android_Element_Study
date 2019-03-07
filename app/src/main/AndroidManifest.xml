@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".sixth_pass_bitmap.BitmapTestActivity">
+        <activity android:name=".eleven_pass_okhttp_retrofit.OkHttpTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

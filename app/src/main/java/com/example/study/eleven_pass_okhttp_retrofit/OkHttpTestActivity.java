@@ -14,10 +14,8 @@ import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Interceptor;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class OkHttpTestActivity extends AppCompatActivity {
@@ -26,67 +24,67 @@ public class OkHttpTestActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //创建OkHttpClient对象
-        OkHttpClient httpClient = new OkHttpClient();
-        //创建Request对象
-        Request request = new Request.Builder()
-                .url("http://www.baidu.com")
-                .addHeader("key", "value")
-                .get()
-                .build();
-        //get方法同步请求
-        try {
-            Response response = httpClient.newCall(request).execute();
-            if (response.isSuccessful()) {
-                String result = response.body().string();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //get方法异步请求
-        httpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                //请求失败
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                //请求成功
-                String result = response.body().string();
-            }
-        });
-
-        //post请求
-        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
-        String data = "{key:value}";
-        RequestBody requestBody = RequestBody.create(mediaType, data);
-        Request request1 = new Request.Builder()
-                .url("http://www.baidu.com")
-                .post(requestBody)
-                .build();
-        //post同步请求
-        try {
-            Response response = httpClient.newCall(request1).execute();
-            if (response.isSuccessful()) {
-                String result = response.body().string();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //post异步请求
-        httpClient.newCall(request1).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                //请求失败
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                //请求成功
-                String result = response.body().string();
-            }
-        });
+//        OkHttpClient httpClient = new OkHttpClient();
+//        //创建Request对象
+//        Request request = new Request.Builder()
+//                .url("http://www.baidu.com")
+//                .addHeader("key", "value")
+//                .get()
+//                .build();
+//        //get方法同步请求
+//        try {
+//            Response response = httpClient.newCall(request).execute();
+//            if (response.isSuccessful()) {
+//                String result = response.body().string();
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        //get方法异步请求
+//        httpClient.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                //请求失败
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                //请求成功
+//                String result = response.body().string();
+//            }
+//        });
+//
+//        //post请求
+//        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+//        String data = "{key:value}";
+//        RequestBody requestBody = RequestBody.create(mediaType, data);
+//        Request request1 = new Request.Builder()
+//                .url("http://www.baidu.com")
+//                .post(requestBody)
+//                .build();
+//        //post同步请求
+//        try {
+//            Response response = httpClient.newCall(request1).execute();
+//            if (response.isSuccessful()) {
+//                String result = response.body().string();
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        //post异步请求
+//        httpClient.newCall(request1).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                //请求失败
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                //请求成功
+//                String result = response.body().string();
+//            }
+//        });
 
         //创建拦截器
         Interceptor logInterceptor = new Interceptor() {
@@ -111,7 +109,22 @@ public class OkHttpTestActivity extends AppCompatActivity {
                 .writeTimeout(10, TimeUnit.SECONDS)//写操作超时时间
                 .readTimeout(10, TimeUnit.SECONDS)//读操作超时时间
                 .cache(cache)//添加缓存
-                .addInterceptor(logInterceptor)
+//                .addInterceptor(logInterceptor)//应用拦截器
+                .addNetworkInterceptor(logInterceptor)//网络拦截器
                 .build();
+
+
+        Request request2=new Request.Builder().url("http://www.baidu.com").get().build();
+        client.newCall(request2).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+            }
+        });
     }
 }
