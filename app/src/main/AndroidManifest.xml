@@ -29,6 +29,7 @@
         <activity android:name=".fourth_pass_animation.PropertySpecialUseActivity" />
         <activity android:name=".fourth_pass_gesturedetector.GestureDetectorActivity" />
         <activity android:name=".seven_pass_sqlite.SQLiteActivity" />
+        <activity android:name=".eleven_pass_okhttp_retrofit.RetrofitTestActivity" />
     </application>
 
 </manifest>
