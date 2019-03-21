@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.FutureTarget;
-import com.bumptech.glide.request.RequestFutureTarget;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -25,6 +24,10 @@ import com.example.study.R;
 import java.io.File;
 import java.util.concurrent.ExecutionException;
 
+import jp.wasabeef.glide.transformations.BlurTransformation;
+
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
+
 public class GlideTestActivity extends AppCompatActivity {
     private ImageView iv;
 
@@ -33,8 +36,8 @@ public class GlideTestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_glide);
         iv = findViewById(R.id.iv_image);
-        final String imgUrl = "http://image.baidu.com/search/detail?ct=503316480&z=&tn=baiduimagedetail&ipn=d&word=%E5%9B%BE%E7%89%87%20%E7%BE%8E%E5%A5%B3%20%E7%9F%AD%E8%A3%99%20%E7%9C%9F%E7%A9%BA&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=-1&hd=&latest=&copyright=&cs=1036725056,1311775701&os=3375421162,631467612&simid=0,0&pn=1&rn=1&di=58300&ln=860&fr=&fmq=1553156063710_R&fm=result&ic=&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&is=0,0&istype=2&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&objurl=http%3A%2F%2Fwww.vpbao.com%2Fcontent%2Fuploadfile%2F201811%2F436e2dcd1562bad22117d338af9caa5d20181102101005.jpg&rpstart=0&rpnum=0&adpicid=0&force=undefined&ctd=1553156066889^3_1903X920%1";
-//        final String imgUrl = "http://guolin.tech/test.gif";
+//        final String imgUrl = "http://image.baidu.com/search/detail?ct=503316480&z=&tn=baiduimagedetail&ipn=d&word=%E5%9B%BE%E7%89%87%20%E7%BE%8E%E5%A5%B3%20%E7%9F%AD%E8%A3%99%20%E7%9C%9F%E7%A9%BA&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=-1&hd=&latest=&copyright=&cs=1036725056,1311775701&os=3375421162,631467612&simid=0,0&pn=1&rn=1&di=58300&ln=860&fr=&fmq=1553156063710_R&fm=result&ic=&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&is=0,0&istype=2&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&objurl=http%3A%2F%2Fwww.vpbao.com%2Fcontent%2Fuploadfile%2F201811%2F436e2dcd1562bad22117d338af9caa5d20181102101005.jpg&rpstart=0&rpnum=0&adpicid=0&force=undefined&ctd=1553156066889^3_1903X920%1";
+        final String imgUrl = "http://guolin.tech/book.png";
         final RequestOptions options = new RequestOptions()
                 .circleCrop()//圆形化
                 .skipMemoryCache(true)//禁用内存缓存
@@ -47,10 +50,11 @@ public class GlideTestActivity extends AppCompatActivity {
                 iv.setImageDrawable(resource);
             }
         };
-        Glide.with(this).load(imgUrl).into(target);
+//        Glide.with(this).load(imgUrl).into(target);
         findViewById(R.id.btn_load).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                transform();
                 loadImage(imgUrl);
 //                Glide.with(GlideTestActivity.this).asBitmap().load(imgUrl).apply(options).into(iv);
             }
@@ -101,5 +105,20 @@ public class GlideTestActivity extends AppCompatActivity {
                         return false;
                     }
                 }).into(iv);
+    }
+
+    private void transform() {
+//        RequestOptions options = new RequestOptions()
+//                .transforms(new BlurTransformation(), new GrayscaleTransformation());
+//        Glide.with(this).load("http://guolin.tech/book.png").apply(options).into(iv);
+//        MultiTransformation multi = new MultiTransformation<>(
+//                new BlurTransformation(25),
+//                new RoundedCornersTransformation(128, 0, RoundedCornersTransformation.CornerType.BOTTOM));
+//        Glide.with(this).load("http://guolin.tech/book.png")
+//                .apply(bitmapTransform(multi))
+//                .into(iv);
+        Glide.with(this).load("http://guolin.tech/book.png")
+                .apply(bitmapTransform(new BlurTransformation(25, 3)))
+                .into(iv);
     }
 }
