@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".eleven_pass_okhttp_retrofit.OkHttpTestActivity">
+        <activity android:name=".twelve_pass_rxjava.RxJavaTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,6 +30,7 @@
         <activity android:name=".fourth_pass_gesturedetector.GestureDetectorActivity" />
         <activity android:name=".seven_pass_sqlite.SQLiteActivity" />
         <activity android:name=".eleven_pass_okhttp_retrofit.RetrofitTestActivity" />
+        <!--<activity android:name=".twelve_pass_rxjava.RxJavaTestActivity" />-->
     </application>
 
 </manifest>

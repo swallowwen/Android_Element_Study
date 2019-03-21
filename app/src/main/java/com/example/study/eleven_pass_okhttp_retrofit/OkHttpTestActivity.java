@@ -5,6 +5,9 @@ import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.study.twelve_pass_rxjava.Group;
+import com.example.study.twelve_pass_rxjava.Student;
+
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
@@ -136,77 +139,6 @@ public class OkHttpTestActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-
-            }
-        });
-
-        filter();
-        Flowable.range(0,300)
-                .onBackpressureDrop()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Integer>() {
-                    @Override
-                    public void onSubscribe(Subscription s) {
-
-                    }
-
-                    @Override
-                    public void onNext(Integer integer) {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
-    private void filter() {
-        Observable.just("a", "b", "c", "d").filter(new Predicate<String>() {
-            @Override
-            public boolean test(String s) throws Exception {
-                return "d".equals(s);
-            }
-        }).subscribe(new Consumer<String>() {
-            @Override
-            public void accept(String s) throws Exception {
-                System.out.println("accept:"+s);
-            }
-        });
-    }
-
-    private void flatMap(){
-        Observable.just(new Group(1))
-                .flatMap(new Function<Group, ObservableSource<Student>>() {
-                    @Override
-                    public ObservableSource<Student> apply(Group group) throws Exception {
-                        return Observable.fromIterable(group.getStudents());
-                    }
-                }).subscribe(new Observer<Student>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(Student student) {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
 
             }
         });

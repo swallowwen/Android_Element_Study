@@ -1,4 +1,4 @@
-package com.example.study.eleven_pass_okhttp_retrofit;
+package com.example.study.twelve_pass_rxjava;
 
 import java.util.ArrayList;
 import java.util.List;

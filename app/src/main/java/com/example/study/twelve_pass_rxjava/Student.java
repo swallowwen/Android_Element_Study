@@ -1,4 +1,4 @@
-package com.example.study.eleven_pass_okhttp_retrofit;
+package com.example.study.twelve_pass_rxjava;
 
 public class Student {
     private String name;
