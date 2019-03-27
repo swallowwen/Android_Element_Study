@@ -7,16 +7,19 @@
     android:padding="10dp">
 
     <com.example.study.third_pass_customer_view.CircleView
+        android:id="@+id/cl_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:circle_color="@color/colorAccent" />
 
     <Button
+        android:id="@+id/btn_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="按钮1" />
 
     <Button
+        android:id="@+id/btn_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
