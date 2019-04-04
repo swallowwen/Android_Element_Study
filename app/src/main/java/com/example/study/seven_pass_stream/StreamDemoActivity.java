@@ -1,8 +1,8 @@
 package com.example.study.seven_pass_stream;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -15,8 +15,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.RandomAccessFile;
 
 public class StreamDemoActivity extends AppCompatActivity {
     @Override
